@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/constants/app_constants.dart';
+import '../../../../core/router/app_navigator.dart';
 import '../../../../core/router/route_names.dart';
 import '../viewmodel/home_viewmodel.dart';
 
@@ -15,7 +16,7 @@ class HomePage extends StatelessWidget {
         title: const Text(AppConstants.appName),
         actions: [
           TextButton(
-            onPressed: () => Navigator.of(context).pushReplacementNamed(RouteNames.login),
+            onPressed: () => AppNavigator.pushReplacementNamed(RouteNames.login),
             child: const Text('退出'),
           ),
         ],

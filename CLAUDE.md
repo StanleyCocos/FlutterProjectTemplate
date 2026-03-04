@@ -74,6 +74,22 @@ flutter test
 flutter analyze
 ```
 
+## Code Style Rules
+
+### Unused Parameters
+
+- All unused parameters must be prefixed with underscores (`_`)
+- Use single underscore `_` for all unused parameters
+- This is a strict rule enforced across the codebase
+
+```dart
+// ✅ Correct - unused parameters with underscore
+pageBuilder: (_, _) => const MaterialPage(child: SplashPage()),
+
+// ❌ Incorrect - unused parameters without underscore
+pageBuilder: (context, state) => const MaterialPage(child: SplashPage()),
+```
+
 ## Key Patterns
 
 ### Adding a New Feature

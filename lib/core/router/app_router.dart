@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../features/auth/presentation/view/login_page.dart';
 import '../../features/auth/presentation/view/register_page.dart';
@@ -6,34 +7,31 @@ import '../../features/home/presentation/view/home_page.dart';
 import '../../features/splash/presentation/view/splash_page.dart';
 import 'route_names.dart';
 
-/// 应用路由配置（可后续替换为 GoRouter）
+/// 应用路由配置（使用 GoRouter 作为底层实现）
+///
+/// GoRouter 提供声明式路由、深度链接、路由守卫等功能。
+/// 本类封装 GoRouter 配置，未来如需更换路由库，只需修改本类。
 class AppRouter {
   AppRouter._();
 
-  static Route<dynamic>? onGenerateRoute(RouteSettings settings) {
-    switch (settings.name) {
-      case RouteNames.splash:
-        return MaterialPageRoute<void>(
-          settings: settings,
-          builder: (_) => const SplashPage(),
-        );
-      case RouteNames.login:
-        return MaterialPageRoute<void>(
-          settings: settings,
-          builder: (_) => const LoginPage(),
-        );
-      case RouteNames.register:
-        return MaterialPageRoute<void>(
-          settings: settings,
-          builder: (_) => const RegisterPage(),
-        );
-      case RouteNames.home:
-        return MaterialPageRoute<void>(
-          settings: settings,
-          builder: (_) => const HomePage(),
-        );
-      default:
-        return null;
-    }
+  /// 创建简单的 GoRoute（path 和 name 相同）
+  static GoRoute _goRoute(String name, Widget child) {
+    return GoRoute(
+      path: name,
+      name: name,
+      pageBuilder: (_, _) => MaterialPage(child: child),
+    );
   }
+
+  /// GoRouter 实例，供导航中间层使用
+  static final GoRouter router = GoRouter(
+    initialLocation: RouteNames.splash,
+    debugLogDiagnostics: true,
+    routes: [
+      _goRoute(RouteNames.splash, const SplashPage()),
+      _goRoute(RouteNames.login, const LoginPage()),
+      _goRoute(RouteNames.register, const RegisterPage()),
+      _goRoute(RouteNames.home, const HomePage()),
+    ],
+  );
 }

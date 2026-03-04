@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../router/app_navigator.dart';
+
 /// 通用弹窗
 class AppDialog {
   AppDialog._();
@@ -18,12 +20,12 @@ class AppDialog {
         content: Text(message),
         actions: [
           TextButton(
-            onPressed: () => Navigator.of(context).pop(),
+            onPressed: () => AppNavigator.pop(),
             child: const Text('取消'),
           ),
           FilledButton(
             onPressed: () {
-              Navigator.of(context).pop();
+              AppNavigator.pop();
               onConfirm?.call();
             },
             child: Text(confirmText ?? '确定'),

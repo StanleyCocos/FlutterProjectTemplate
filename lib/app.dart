@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import 'core/constants/api_constants.dart';
 import 'core/domain/repositories/auth_repository.dart';
 import 'core/router/app_router.dart';
-import 'core/router/route_names.dart';
 import 'core/theme/app_theme.dart';
 import 'data/datasources/local/auth_local_datasource_impl.dart';
 import 'data/datasources/remote/auth_remote_datasource_impl.dart';
@@ -36,12 +35,11 @@ class App extends StatelessWidget {
           create: (_) => HomeViewModel(),
         ),
       ],
-      child: MaterialApp(
+      child: MaterialApp.router(
         title: 'Flutter Project Template',
         theme: AppTheme.light,
         darkTheme: AppTheme.dark,
-        onGenerateRoute: AppRouter.onGenerateRoute,
-        initialRoute: RouteNames.splash,
+        routerConfig: AppRouter.router,
       ),
     );
   }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../core/router/app_navigator.dart';
 import '../../../../core/router/route_names.dart';
 import '../../../../core/widgets/buttons/app_button.dart';
 import '../../../../core/utils/validators.dart';
@@ -73,12 +74,12 @@ class _LoginPageState extends State<LoginPage> {
                       );
                       if (!context.mounted) return;
                       if (vm.error == null) {
-                        Navigator.of(context).pushReplacementNamed(RouteNames.home);
+                        AppNavigator.pushReplacementNamed(RouteNames.home);
                       }
                     },
                   ),
                   TextButton(
-                    onPressed: () => Navigator.of(context).pushReplacementNamed(RouteNames.register),
+                    onPressed: () => AppNavigator.pushReplacementNamed(RouteNames.register),
                     child: const Text('去注册'),
                   ),
                 ],
