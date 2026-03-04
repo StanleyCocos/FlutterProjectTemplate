@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'core/constants/api_constants.dart';
 import 'core/domain/repositories/auth_repository.dart';
 import 'core/router/app_router.dart';
+import 'core/router/route_names.dart';
 import 'core/theme/app_theme.dart';
 import 'data/datasources/local/auth_local_datasource_impl.dart';
 import 'data/datasources/remote/auth_remote_datasource_impl.dart';
@@ -39,14 +41,28 @@ class App extends StatelessWidget {
         theme: AppTheme.light,
         darkTheme: AppTheme.dark,
         onGenerateRoute: AppRouter.onGenerateRoute,
-        initialRoute: '/splash',
+        initialRoute: RouteNames.splash,
       ),
     );
   }
 
   AuthRepository _createAuthRepository() {
-    final remote = AuthRemoteDataSourceImpl();
+    // 创建 HTTP 客户端（使用网络中间层）
+    final httpClient = DataInjection.createHttpClient(
+      baseUrl: ApiConstants.baseUrl,
+      enableLogging: true, // 调试模式启用日志
+      tokenProvider: _getToken,
+    );
+
+    final remote = AuthRemoteDataSourceImpl(httpClient);
     final local = AuthLocalDataSourceImpl();
     return DataInjection.provideAuthRepository(remote, local);
+  }
+
+  /// 获取认证 Token
+  Future<String?> _getToken() async {
+    // 从本地存储获取 token
+    // 实际实现中可以从 LocalDataSource 或 SharedPreferences 获取
+    return null;
   }
 }

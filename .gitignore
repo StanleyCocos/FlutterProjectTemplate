@@ -67,7 +67,6 @@ obj/
 .flutter-plugins
 .flutter-plugins-dependencies
 # 针对 FVM (Flutter Version Management) 的忽略
-.fvm/flutter_sdk
 
 # ----------------------------------------------------------------------------
 # IDE 及编辑器
@@ -93,3 +92,6 @@ obj/
 *.js.map
 *.info.json
 .DS_Store
+
+# FVM Version Cache
+.fvm/

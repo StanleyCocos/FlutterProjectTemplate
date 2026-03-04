@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(flutter analyze)",
+      "Bash(flutter --version)",
+      "Bash(flutter pub get)",
+      "Bash(flutter analyze)",
+      "Bash(flutter pub upgrade)",
+      "Bash(fvm flutter --version)",
+      "Bash(fvm flutter pub get)",
+      "Bash(fvm flutter analyze)",
+      "Bash(fvm flutter pub upgrade)"
+    ]
+  }
+}
