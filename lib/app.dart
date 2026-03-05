@@ -11,6 +11,7 @@ import 'data/di/data_injection.dart';
 import 'features/auth/presentation/viewmodel/login_viewmodel.dart';
 import 'features/auth/presentation/viewmodel/register_viewmodel.dart';
 import 'features/home/presentation/viewmodel/home_viewmodel.dart';
+import 'features/list/presentation/viewmodel/list_viewmodel.dart';
 import 'features/splash/presentation/viewmodel/splash_viewmodel.dart';
 
 class App extends StatelessWidget {
@@ -33,6 +34,9 @@ class App extends StatelessWidget {
         ),
         ChangeNotifierProvider<HomeViewModel>(
           create: (_) => HomeViewModel(),
+        ),
+        ChangeNotifierProvider<ListViewModel>(
+          create: (_) => ListViewModel(),
         ),
       ],
       child: MaterialApp.router(

@@ -17,7 +17,7 @@ class SplashViewModel extends ChangeNotifier {
 
   Future<void> init() async {
     final loggedIn = await _authRepository.isLoggedIn;
-    _nextRoute = loggedIn ? RouteNames.home : RouteNames.login;
+    _nextRoute = loggedIn ? RouteNames.home : RouteNames.home;
     _ready = true;
     notifyListeners();
   }

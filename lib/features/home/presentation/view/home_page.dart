@@ -1,19 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
-import '../../../../core/constants/app_constants.dart';
+import '../../../../core/base/consumer_page.dart';
 import '../../../../core/router/app_navigator.dart';
 import '../../../../core/router/route_names.dart';
 import '../viewmodel/home_viewmodel.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends ConsumerPageState<HomePage, HomeViewModel> {
+  @override
+  Widget buildPage(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(AppConstants.appName),
+        title: _buildTitle(),
         actions: [
           TextButton(
             onPressed: () => AppNavigator.pushReplacementNamed(RouteNames.login),
@@ -22,28 +26,24 @@ class HomePage extends StatelessWidget {
         ],
       ),
       body: Center(
-        child: ListenableBuilder(
-          listenable: context.watch<HomeViewModel>(),
-          builder: (context, _) {
-            final vm = context.read<HomeViewModel>();
-            return Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text('You have pushed the button this many times:'),
-                Text(
-                  '${vm.counter}',
-                  style: Theme.of(context).textTheme.headlineMedium,
-                ),
-              ],
-            );
-          },
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text('You have pushed the button this many times:'),
+            Text(
+              '${vm.counter}',
+              style: Theme.of(context).textTheme.headlineMedium,
+            ),
+          ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => context.read<HomeViewModel>().increment(),
+        onPressed: vm.increment,
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ),
     );
   }
+
+  Widget _buildTitle() => Text('Count: ${vm.counter}');
 }

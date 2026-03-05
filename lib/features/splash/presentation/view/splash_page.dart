@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
+import '../../../../core/base/consumer_page.dart';
 import '../../../../core/constants/app_constants.dart';
 import '../../../../core/router/app_navigator.dart';
 import '../viewmodel/splash_viewmodel.dart';
@@ -12,20 +12,19 @@ class SplashPage extends StatefulWidget {
   State<SplashPage> createState() => _SplashPageState();
 }
 
-class _SplashPageState extends State<SplashPage> {
+class _SplashPageState extends ConsumerPageState<SplashPage, SplashViewModel> {
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      await context.read<SplashViewModel>().init();
+      await vm.init();
       if (!mounted) return;
-      final nextRoute = context.read<SplashViewModel>().nextRoute;
-      AppNavigator.pushReplacementNamed(nextRoute);
+      AppNavigator.pushReplacementNamed(vm.nextRoute);
     });
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget buildPage(BuildContext context) {
     return Scaffold(
       body: Center(
         child: Text(

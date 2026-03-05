@@ -34,9 +34,10 @@ lib/
 ├── main.dart              # App entry point
 ├── app.dart               # Root widget with MaterialApp, theme, routes, providers
 ├── core/
+│   ├── base/              # Base classes (ConsumerPage)
 │   ├── constants/         # App & API constants
 │   ├── theme/             # AppTheme, AppColors
-│   ├── router/            # AppRouter, RouteNames
+│   ├── router/            # AppRouter, RouteNames, AppNavigator
 │   ├── utils/             # Extensions, validators
 │   ├── widgets/           # Global reusable components (buttons, dialogs, loading)
 │   ├── errors/            # AppException, error handling
@@ -106,9 +107,28 @@ pageBuilder: (context, state) => const MaterialPage(child: SplashPage()),
 ### State Management with Provider
 
 - ViewModels extend `ChangeNotifier`
-- Use `ListenableBuilder` with `context.watch<ViewModel>()` in views
+- Use `ConsumerPage<ViewModel>` for simple pages (ViewModel auto-injected)
+- Use `ListenableBuilder` with `context.watch<ViewModel>()` for complex pages
 - Access ViewModel methods with `context.read<ViewModel>()`
 - Use `notifyListeners()` to trigger rebuilds
+
+#### Using ConsumerPage (Recommended for simple pages)
+
+```dart
+class HomePage extends ConsumerPage<HomeViewModel> {
+  const HomePage({super.key});
+
+  @override
+  Widget buildPage(BuildContext context, HomeViewModel vm) {
+    return Scaffold(
+      body: Text('${vm.counter}'),
+      floatingActionButton: FloatingActionButton(
+        onPressed: vm.increment,
+      ),
+    );
+  }
+}
+```
 
 ### Data Layer Pattern
 
@@ -147,11 +167,12 @@ Provider<SomeRepository>.value(value: someRepo)
 
 ### Routing
 
-Routes are defined using a centralized `AppRouter` with `onGenerateRoute`. Access routes using:
+Routes are defined using GoRouter with `AppRouter`. Use `AppNavigator` for navigation:
 
 ```dart
-Navigator.of(context).pushNamed(RouteNames.routeName);
-Navigator.of(context).pushReplacementNamed(RouteNames.routeName);
+AppNavigator.pushNamed(RouteNames.routeName);
+AppNavigator.pushReplacementNamed(RouteNames.routeName);
+AppNavigator.pop();
 ```
 
 ## Theme & Design

@@ -9,7 +9,8 @@
       "Bash(fvm flutter --version)",
       "Bash(fvm flutter pub get)",
       "Bash(fvm flutter analyze)",
-      "Bash(fvm flutter pub upgrade)"
+      "Bash(fvm flutter pub upgrade)",
+      "Bash(flutter analyze --no-pub)"
     ]
   }
 }

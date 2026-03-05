@@ -1,11 +1,11 @@
 /// 通用校验器
 class Validators {
-  Validators._();
+  // ignore: deprecated_member_use
+  static final _emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
 
   static String? email(String? value) {
     if (value == null || value.isEmpty) return '请输入邮箱';
-    final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
-    if (!emailRegex.hasMatch(value)) return '邮箱格式不正确';
+    if (!_emailRegex.hasMatch(value)) return '邮箱格式不正确';
     return null;
   }
 
