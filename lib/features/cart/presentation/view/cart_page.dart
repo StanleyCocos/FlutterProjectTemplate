@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/base/consumer_page.dart';
+import '../../domain/models/cart_item_model.dart' show CartItemModel;
 import '../viewmodel/cart_viewmodel.dart';
 
 /// 购物车页面 View

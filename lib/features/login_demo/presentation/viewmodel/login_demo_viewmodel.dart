@@ -1,7 +1,8 @@
 import 'package:flutter/foundation.dart';
 
-import '../../../core/domain/repositories/auth_repository.dart';
-import '../models/user_model.dart';
+import '../../../../core/domain/repositories/auth_repository.dart';
+import '../../../../core/errors/app_exception.dart';
+import '../../models/user_model.dart';
 
 /// 登录页面 ViewModel
 /// 职责：
@@ -12,6 +13,9 @@ import '../models/user_model.dart';
 /// ✅ 包含：状态管理、业务逻辑、数据获取
 /// ❌ 不包含：UI 导航、Dialog 显示、Context 操作
 class LoginDemoViewModel extends ChangeNotifier {
+  LoginDemoViewModel(this._authRepository);
+
+  final AuthRepository _authRepository;
   String _email = '';
   String _password = '';
   bool _loading = false;
@@ -50,7 +54,7 @@ class LoginDemoViewModel extends ChangeNotifier {
 
   /// 执行登录
   /// 这里的所有业务逻辑都属于 ViewModel 职责
-  Future<void> login(AuthRepository authRepo) async {
+  Future<void> login() async {
     if (!canSubmit) return;
 
     _loading = true;
@@ -58,7 +62,7 @@ class LoginDemoViewModel extends ChangeNotifier {
     notifyListeners();
 
     try {
-      final result = await authRepo.login(_email, _password);
+      final result = await _authRepository.login(_email, _password);
       _user = UserModel(
         id: result.userId,
         email: _email,
@@ -80,7 +84,7 @@ class LoginDemoViewModel extends ChangeNotifier {
     if (!_email.contains('@')) {
       _error = '邮箱格式不正确';
     } else {
-      if (_error?.contains('邮箱')) _error = null;
+      if (_error?.contains('邮箱') ?? false) _error = null;
     }
     return true;
   }
@@ -91,7 +95,7 @@ class LoginDemoViewModel extends ChangeNotifier {
     if (_password.length < 6) {
       _error = '密码至少6位';
     } else {
-      if (_error?.contains('密码')) _error = null;
+      if (_error?.contains('密码') ?? false) _error = null;
     }
     return true;
   }

@@ -67,9 +67,13 @@ class _ProductSearchPageState extends ConsumerPageState<ProductSearchPage, Produ
           final category = vm.availableCategories[index];
           final isSelected = vm.selectedCategory == category;
           return ChoiceChip(
-            label: category,
+            label: Text(category),
             selected: isSelected,
-            onSelected: (category) => vm.filterByCategory(category),
+            onSelected: (selected) {
+              if (selected) {
+                vm.filterByCategory(category);
+              }
+            },
             selectedColor: isSelected ? Colors.white : null,
           );
         },

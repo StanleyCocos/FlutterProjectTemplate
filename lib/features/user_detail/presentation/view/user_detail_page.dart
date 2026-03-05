@@ -42,19 +42,17 @@ class _UserDetailPageState extends ConsumerPageState<UserDetailPage, UserDetailV
   Widget _buildBody() {
     return Padding(
       padding: const EdgeInsets.all(24),
-      child: vm.user == null
-          ? const Center(child: CircularProgressIndicator())
-          : Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _buildNameField(),
-                const SizedBox(height: 16),
-                _buildEmailField(),
-                const SizedBox(height: 16),
-                if (!vm.editing) _buildActionButton(),
-                if (vm.editing) _buildEditForm(),
-              ],
-            ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _buildNameField(),
+          const SizedBox(height: 16),
+          _buildEmailField(),
+          const SizedBox(height: 16),
+          if (!vm.editing) _buildActionButton(),
+          if (vm.editing) _buildEditForm(),
+        ],
+      ),
     );
   }
 
@@ -65,9 +63,9 @@ class _UserDetailPageState extends ConsumerPageState<UserDetailPage, UserDetailV
         border: OutlineInputBorder(),
         contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 16),
       ),
-      controller: TextEditingController(text: vm.user?.name ?? ''),
+      controller: TextEditingController(text: vm.user.name),
       enabled: vm.editing,
-      onChanged: (value) => vm._editedName = value,
+      onChanged: (value) => vm.editedName = value,
     );
   }
 
@@ -75,10 +73,10 @@ class _UserDetailPageState extends ConsumerPageState<UserDetailPage, UserDetailV
     return TextField(
       decoration: const InputDecoration(
         labelText: '邮箱',
-        border: const OutlineInputBorder(),
+        border: OutlineInputBorder(),
         contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 16),
       ),
-      controller: TextEditingController(text: vm.user?.email ?? ''),
+      controller: TextEditingController(text: vm.user.email),
       enabled: vm.editing,
     );
   }
@@ -104,7 +102,7 @@ class _UserDetailPageState extends ConsumerPageState<UserDetailPage, UserDetailV
               border: OutlineInputBorder(),
               contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 16),
             ),
-            onChanged: (value) => vm._editedName = value,
+            onChanged: (value) => vm.editedName = value,
           ),
         ),
         Expanded(

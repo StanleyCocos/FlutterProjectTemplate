@@ -20,6 +20,11 @@ class UserDetailViewModel extends ChangeNotifier {
   bool get loading => _loading;
   String? get error => _error;
 
+  // Setters
+  set editedName(String value) {
+    _editedName = value;
+  }
+
   /// 更新用户
   /// 业务逻辑：验证数据格式
   void updateUser(UserDetailModel user) {

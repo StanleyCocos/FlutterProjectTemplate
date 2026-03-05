@@ -12,6 +12,7 @@ import 'features/auth/presentation/viewmodel/login_viewmodel.dart';
 import 'features/auth/presentation/viewmodel/register_viewmodel.dart';
 import 'features/home/presentation/viewmodel/home_viewmodel.dart';
 import 'features/list/presentation/viewmodel/list_viewmodel.dart';
+import 'features/login_demo/presentation/viewmodel/login_demo_viewmodel.dart';
 import 'features/splash/presentation/viewmodel/splash_viewmodel.dart';
 
 class App extends StatelessWidget {
@@ -31,6 +32,9 @@ class App extends StatelessWidget {
         ),
         ChangeNotifierProvider<RegisterViewModel>(
           create: (_) => RegisterViewModel(authRepo),
+        ),
+        ChangeNotifierProvider<LoginDemoViewModel>(
+          create: (_) => LoginDemoViewModel(authRepo),
         ),
         ChangeNotifierProvider<HomeViewModel>(
           create: (_) => HomeViewModel(),

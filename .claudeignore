@@ -1,0 +1,63 @@
+# .claudeignore - 專為 Flutter 項目優化
+
+# --- 依賴與構件 (最耗 Token 的部分) ---
+node_modules/
+.dart_tool/
+.packages
+.pub-cache/
+.pub/
+build/
+
+# --- Android 相關 (除非你要改原生代碼) ---
+android/app/src/main/res/
+android/app/build.gradle
+android/.gradle/
+android/app/google-services.json
+*.keystore
+*.jks
+
+# --- iOS 相關 (除非你要改原生代碼) ---
+ios/Pods/
+ios/Runner.xcworkspace/
+ios/Flutter/App.framework/
+ios/Flutter/Flutter.framework/
+ios/Flutter/Generated.xcconfig
+ios/Runner/Assets.xcassets/
+Podfile.lock
+
+# --- 自動生成的代碼 (關鍵！這些文件通常巨大且無需模型閱讀) ---
+*.g.dart
+*.freezed.dart
+*.generated.dart
+*.mocks.dart
+lib/generated/
+lib/l10n/app_localizations*.dart
+
+# --- 資源與多媒體 ---
+assets/
+images/
+fonts/
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.svg
+*.mp4
+*.wav
+
+# --- 字體與本地化 ---
+.flutter-plugins
+.flutter-plugins-dependencies
+
+# --- 測試報告與日誌 ---
+coverage/
+*.log
+*.mode1v3
+*.mode2v3
+*.moved-aside
+
+# --- IDE 與系統文件 ---
+.idea/
+.vscode/
+*.iml
+.DS_Store

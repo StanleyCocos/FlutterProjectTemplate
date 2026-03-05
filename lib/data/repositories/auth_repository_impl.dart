@@ -13,17 +13,29 @@ class AuthRepositoryImpl implements AuthRepository {
   final AuthLocalDataSource _local;
 
   @override
-  Future<void> login(String email, String password) async {
+  Future<AuthResult> login(String email, String password) async {
     final res = await _remote.login(email, password);
     final token = res['token'] as String?;
     if (token != null) await _local.saveToken(token);
+
+    return AuthResult(
+      userId: res['userId'] as String? ?? '',
+      userName: res['userName'] as String? ?? '',
+      avatar: res['avatar'] as String?,
+    );
   }
 
   @override
-  Future<void> register(String email, String password, String? name) async {
+  Future<AuthResult> register(String email, String password, String? name) async {
     final res = await _remote.register(email, password, name);
     final token = res['token'] as String?;
     if (token != null) await _local.saveToken(token);
+
+    return AuthResult(
+      userId: res['userId'] as String? ?? '',
+      userName: res['userName'] as String? ?? name ?? '',
+      avatar: res['avatar'] as String?,
+    );
   }
 
   @override

@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter_project_template/features/cart/domain/models/cart_item_model.dart';
 
-import '../domain/models/cart_item_model.dart';
+
 
 /// 购物车 ViewModel
 /// 职责：
