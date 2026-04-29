@@ -35,8 +35,20 @@ abstract class ConsumerPageState<W extends StatefulWidget, T extends ChangeNotif
   late final T vm;
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // 使用 didChangeDependencies 避免在每次 build 时重复赋值
+    // 同时确保当依赖变化时能正确更新
+    if (!_vmInitialized) {
+      vm = context.watch<T>();
+      _vmInitialized = true;
+    }
+  }
+
+  bool _vmInitialized = false;
+
+  @override
   Widget build(BuildContext context) {
-    vm = context.watch<T>();
     return buildPage(context);
   }
 

@@ -13,6 +13,7 @@ import 'features/auth/presentation/viewmodel/register_viewmodel.dart';
 import 'features/home/presentation/viewmodel/home_viewmodel.dart';
 import 'features/list/presentation/viewmodel/list_viewmodel.dart';
 import 'features/login_demo/presentation/viewmodel/login_demo_viewmodel.dart';
+import 'features/photo_picker/presentation/viewmodel/photo_picker_viewmodel.dart';
 import 'features/splash/presentation/viewmodel/splash_viewmodel.dart';
 
 class App extends StatelessWidget {
@@ -41,6 +42,9 @@ class App extends StatelessWidget {
         ),
         ChangeNotifierProvider<ListViewModel>(
           create: (_) => ListViewModel(),
+        ),
+        ChangeNotifierProvider<PhotoPickerViewModel>(
+          create: (_) => PhotoPickerViewModel(),
         ),
       ],
       child: MaterialApp.router(

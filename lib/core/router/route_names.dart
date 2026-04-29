@@ -8,4 +8,5 @@ class RouteNames {
   static const String home = '/home';
   static const String list = '/list';
   static const String detail = '/detail';
+  static const String photoPicker = '/photo-picker';
 }

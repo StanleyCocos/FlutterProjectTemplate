@@ -6,6 +6,7 @@ import '../../features/auth/presentation/view/register_page.dart';
 import '../../features/detail/presentation/view/detail_page.dart';
 import '../../features/home/presentation/view/home_page.dart';
 import '../../features/list/presentation/view/list_page.dart';
+import '../../features/photo_picker/presentation/view/photo_picker_page.dart';
 import '../../features/splash/presentation/view/splash_page.dart';
 import 'route_names.dart';
 
@@ -36,6 +37,7 @@ class AppRouter {
       _goRoute(RouteNames.home, HomePage()),
       _goRoute(RouteNames.list, const ListPage()),
       _goRoute(RouteNames.detail, const DetailPage()),
+      _goRoute(RouteNames.photoPicker, const PhotoPickerPage()),
     ],
   );
 }

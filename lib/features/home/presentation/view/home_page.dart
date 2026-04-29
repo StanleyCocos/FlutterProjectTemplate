@@ -34,6 +34,15 @@ class _HomePageState extends ConsumerPageState<HomePage, HomeViewModel> {
               '${vm.counter}',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
+            const SizedBox(height: 24),
+            ElevatedButton.icon(
+              onPressed: () => AppNavigator.pushNamed(RouteNames.photoPicker),
+              icon: const Icon(Icons.photo_library),
+              label: const Text('Live Photo 测试'),
+              style: ElevatedButton.styleFrom(
+                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+              ),
+            ),
           ],
         ),
       ),
